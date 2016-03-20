@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     protected $user;
+
     /**
      * Create a new controller instance.
      *
@@ -30,20 +31,24 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $today =  date('Y-m-d', time());
+        $today = date('Y-m-d', time());
         $menu = Menu::all();
         $sum = DB::select("SELECT count(*) AS total, menu.name FROM `order`
             INNER JOIN menu ON menu.id = order.menuID WHERE `order`.created_at LIKE \"{$today}%\"
             GROUP BY menuID ORDER BY count(*) DESC");
-        $order = Order::where('created_at', 'like', date('Y-m-d', time()).'%')->orderBy('created_at', 'desc')->get();
+        $order = Order::where('created_at', 'like', date('Y-m-d', time()) . '%')->orderBy('created_at', 'desc')->get();
         return view('home', ['menus' => $menu, 'orders' => $order, 'userID' => $this->user->id, 'sum' => $sum]);
     }
 
-    public function addMenu($price, $name){
+    public function addMenu($price, $name)
+    {
         Menu::create(['name' => $name, 'price' => $price]);
     }
 
-    public function order($id){
+    public function order($id)
+    {
+        if($error = $this->checkTime())
+            return redirect('/')->withErrors(['time' => $error]);
         Order::create(['userID' => $this->user->id, 'menuID' => $id]);
         $menu = Menu::find($id);
         $menu->sum += 1;
@@ -51,11 +56,12 @@ class HomeController extends Controller
         return redirect('/');
     }
 
-    public function cancel(Request $requests){
+    public function cancel(Request $requests)
+    {
         $order = Order::find($requests->input('orderID'));
         $user = User::find($order->userID);
 
-        if(md5($user->id.$user->name) !== $requests->input('id'))
+        if (md5($user->id . $user->name) !== $requests->input('id'))
             abort(403, 'No Way To Cancel Other Lunch');
 
         $menu = Menu::find($order->menuID);
@@ -64,5 +70,16 @@ class HomeController extends Controller
 
         $order->delete();
         return redirect('/');
+    }
+
+    private function checkTime()
+    {
+        $hour = date('H');
+
+        if ($hour < 10)
+            return '骚年，没到点呢，先认真工作';
+
+        if ($hour > 12)
+            return '骚年，一切尘埃落定';
     }
 }

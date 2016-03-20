@@ -3,6 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row">
+        @if ($errors->has('time'))
+            <div class="alert alert-danger" role="alert">{{ $errors->first('time') }}</div>
+        @endif
         <div class="col-md-12">
             <div class="col-md-4">
                 <div class="panel panel-primary">
