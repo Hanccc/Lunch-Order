@@ -37,8 +37,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/', 'HomeController@index');
 
     Route::get('/addMenu/{price}/{name}', 'HomeController@addMenu');
+    Route::get('/addMenu/{price}/{name}/{type}', 'HomeController@addMenu');
 
-    Route::get('/order/{id}', 'HomeController@order');
+    Route::get('/order/{id}/{type}', 'HomeController@order');
 
     Route::get('/cancel', 'HomeController@cancel');
+
+    Route::get('/admin', 'MenuController@index');
 });

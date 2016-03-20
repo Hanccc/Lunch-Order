@@ -33,23 +33,26 @@ class HomeController extends Controller
     {
         $today = date('Y-m-d', time());
         $menu = Menu::all();
-        $sum = DB::select("SELECT count(*) AS total, menu.name FROM `order`
+        $sum = DB::select("SELECT count(*) AS total, menu.name, `order`.type FROM `order`
             INNER JOIN menu ON menu.id = order.menuID WHERE `order`.created_at LIKE \"{$today}%\"
-            GROUP BY menuID ORDER BY count(*) DESC");
+            GROUP BY menuID, `order`.type ORDER BY count(*) DESC");
         $order = Order::where('created_at', 'like', date('Y-m-d', time()) . '%')->orderBy('created_at', 'desc')->get();
         return view('home', ['menus' => $menu, 'orders' => $order, 'userID' => $this->user->id, 'sum' => $sum]);
     }
 
-    public function addMenu($price, $name)
+    public function addMenu($price, $name, $type = null)
     {
-        Menu::create(['name' => $name, 'price' => $price]);
+        if($type)
+            Menu::create(['name' => $name, 'price' => $price, 'type' => $type]);
+        else
+            Menu::create(['name' => $name, 'price' => $price]);
     }
 
-    public function order($id)
+    public function order($id, $type = 0)
     {
         if($error = $this->checkTime())
             return redirect('/')->withErrors(['time' => $error]);
-        Order::create(['userID' => $this->user->id, 'menuID' => $id]);
+        Order::create(['userID' => $this->user->id, 'menuID' => $id, 'type' => $type]);
         $menu = Menu::find($id);
         $menu->sum += 1;
         $menu->save();
@@ -79,7 +82,7 @@ class HomeController extends Controller
         if ($hour < 10)
             return '骚年，没到点呢，先认真工作';
 
-        if ($hour > 12)
-            return '骚年，一切尘埃落定';
+//        if ($hour > 12)
+//            return '骚年，一切尘埃落定';
     }
 }

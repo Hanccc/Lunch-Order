@@ -17,7 +17,22 @@
                             <td>{{ $menu->name }}</td>
                             <td>{{ $menu->price }} RMB</td>
                             <td><span class="glyphicon glyphicon-fire" aria-hidden="true"></span> heat: {{ $menu->sum }}</td>
-                            <td><a class="btn btn-primary btn-xs" href="{{ action('HomeController@order', ['id' => $menu->id]) }}">order</a></td>
+                            <td>
+                                @if($menu->type == 0)
+                                <a class="btn btn-primary btn-xs" href="{{ action('HomeController@order', ['id' => $menu->id, 'type' => 0]) }}">order</a>
+                                @else
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            面条类 <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ action('HomeController@order', ['id' => $menu->id, 'type' => 1]) }}">面</a></li>
+                                            <li><a href="{{ action('HomeController@order', ['id' => $menu->id, 'type' => 2]) }}">河粉</a></li>
+                                            <li><a href="{{ action('HomeController@order', ['id' => $menu->id, 'type' => 3]) }}">米粉</a></li>
+                                        </ul>
+                                    </div>
+                                @endif
+                            </td>
                         </tr>
                         @endforeach
                         </tbody>
@@ -32,7 +47,16 @@
                         @foreach($orders as $order)
                             <tr>
                                 <td>{{ $order->user->name }}</td>
-                                <td>{{ $order->menu->name }}</td>
+                                <td>
+                                    {{ $order->menu->name }}
+                                    @if($order->type == 1)
+                                        面
+                                    @elseif($order->type == 2)
+                                        河粉
+                                    @elseif($order->type == 3)
+                                        米粉
+                                    @endif
+                                </td>
                                 <td>{{ $order->menu->price }} RMB</td>
                                 <td>
                                 @if($order->user->id == $userID)
@@ -52,7 +76,15 @@
                         <tbody>
                         @foreach($sum as $order)
                             <tr>
-                                <td>{{ $order->name }}</td>
+                                <td>{{ $order->name }}
+                                    @if($order->type == 1)
+                                        面
+                                    @elseif($order->type == 2)
+                                        河粉
+                                    @elseif($order->type == 3)
+                                        米粉
+                                    @endif
+                                </td>
                                 <td>{{ $order->total }} piece</td>
                             </tr>
                         @endforeach

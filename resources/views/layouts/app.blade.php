@@ -41,6 +41,13 @@
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
+                @if (!Auth::guest())
+                    @if(Auth::user()->group == 1)
+                        <ul class="nav navbar-nav">
+                            <li><a href="{{ url('/admin') }}">Admin</a></li>
+                        </ul>
+                    @endif
+                @endif
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">

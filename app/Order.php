@@ -8,7 +8,7 @@ class Order extends Model
 {
     protected $table = 'order';
 
-    protected $fillable = ['userID', 'menuID'];
+    protected $fillable = ['userID', 'menuID', 'type'];
 
     public function menu(){
         return $this->hasOne('App\Menu', 'id', 'menuID');
