@@ -128,8 +128,6 @@ class AuthController extends Controller
 
         $response = json_decode($response->getBody()->getContents());
 
-        print_r(property_exists($response, 'Name'));
-
         return (property_exists($response, 'Name') && $response->Name === $name)?true:false;
     }
 
