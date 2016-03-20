@@ -82,7 +82,7 @@ class HomeController extends Controller
         if ($hour < 10)
             return '骚年，没到点呢，先认真工作';
 
-//        if ($hour > 12)
-//            return '骚年，一切尘埃落定';
+        if ($hour > 12)
+            return '骚年，一切尘埃落定';
     }
 }
