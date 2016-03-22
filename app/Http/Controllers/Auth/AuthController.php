@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use Validator;
 use Auth;
+use app\libs\Exmail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use GuzzleHttp\Client;
 
 class AuthController extends Controller
 {
@@ -84,69 +84,17 @@ class AuthController extends Controller
         $name = $request->input('name');
         $email = $request->input('email');
 
-        if($this->isUserExist($name, $email))
-            return redirect('/');
-
-        if(!$this->loginWithOpenApi($name, $email))
+        if(!(new Exmail())->login($name, $email))
             return $this->sendFailedLoginResponse($request);
 
-        $user = User::create(['name' => $name, 'email' => $email]);
+        if(!$user = (new User())->isUserExist($name, $email))
+            $user = User::create(['name' => $name, 'email' => $email]);
+
         Auth::login($user);
 
         return redirect('/');
     }
 
-    public function isUserExist($name, $email)
-    {
-        $user = User::where('name', $name)->where('email', $email)->first();
-
-        if(!$user)
-            return false;
-
-        Auth::login($user);
-
-        return true;
-    }
-
-    public function loginWithOpenApi($name, $email)
-    {
-        $token = $this->getExmailToken();
-
-        return $this->exmailValidate($name, $email, $token);
-    }
-
-    private function exmailValidate($name, $email, $token)
-    {
-        $client = new Client(['verify' => false]);
-
-        $response = $client->request('POST', 'http://openapi.exmail.qq.com:12211/openapi/user/get', [
-            'query' => [
-                'alias' => $email,
-                'access_token' => $token,
-            ]
-        ]);
-
-        $response = json_decode($response->getBody()->getContents());
-
-        return (property_exists($response, 'Name') && $response->Name === $name)?true:false;
-    }
-
-    private function getExmailToken()
-    {
-        $client = new Client(['verify' => false]);
-
-        $response = $client->request('POST', 'https://exmail.qq.com/cgi-bin/token', [
-            'query' => [
-                'client_id' => config('services.exmail.client_id'),
-                'client_secret' => config('services.exmail.client_secret'),
-                'grant_type' => 'client_credentials',
-            ]
-        ]);
-
-        $response = json_decode($response->getBody()->getContents());
-
-        return $response->access_token;
-    }
 
     public function logout()
     {

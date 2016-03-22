@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Auth;
 
 class User extends Authenticatable
 {
@@ -24,4 +25,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function isUserExist($name, $email)
+    {
+        $user = User::where('name', $name)->where('email', $email)->first();
+
+        if(!$user)
+            return false;
+
+        return $user;
+    }
+
+    public function login($user)
+    {
+        Auth::login($user);
+    }
 }
