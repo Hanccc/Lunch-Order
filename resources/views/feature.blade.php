@@ -14,6 +14,7 @@
                     * 增加订单总数排序<br>
                     * 修复点餐订单按人合并<br>
                     * 增加定时刷新（5秒刷新一次）<br>
+                    * 增加时间限制(10am - 11:40am)<br>
                     * 增加特性栏（feature）<br><br>
                     <div class="col-md-3 col-md-offset-10">2016-3-24</div>
                 </div>
