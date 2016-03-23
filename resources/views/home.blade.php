@@ -7,18 +7,6 @@
             <div class="alert alert-danger" role="alert">{{ $errors->first('time') }}</div>
         @endif
         <div class="col-md-12">
-            <div class="panel panel-warning">
-                <div class="panel-heading">New Feature!</div>
-                <div class="panel-body">
-                    @if(isset($feature))
-                        {{ $feature }}
-                    @else
-                        no feature
-                    @endif
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
             <div class="col-md-4">
                 <div class="panel panel-primary">
                     <div class="panel-heading">Menu</div>
