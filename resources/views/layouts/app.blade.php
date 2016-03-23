@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>XiYangHui Lunch Order System</title>
 
     <!-- Styles -->
     <link href="{{  asset('css/bootstrap.min.css') }}" rel="stylesheet">
@@ -41,13 +41,14 @@
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url('/feature') }}">Feature</a></li>
                 @if (!Auth::guest())
                     @if(Auth::user()->group == 1)
-                        <ul class="nav navbar-nav">
                             <li><a href="{{ url('/admin') }}">Admin</a></li>
-                        </ul>
                     @endif
                 @endif
+                </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">

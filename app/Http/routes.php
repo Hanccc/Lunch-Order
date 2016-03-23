@@ -44,4 +44,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/cancel', 'HomeController@cancel');
 
     Route::get('/admin', 'MenuController@index');
+
+    Route::get('/feature', function(){
+        return view('feature');
+    });
 });

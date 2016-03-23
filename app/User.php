@@ -42,8 +42,8 @@ class User extends Authenticatable
     }
 
     public function loginAsTest(){
-        $name = 'test1';
-        $email = 'test1@test.com';
+        $name = 'test2';
+        $email = 'test2@test.com';
         if(!$user = (new User())->isUserExist($name, $email))
             $user = User::create(['name' => $name, 'email' => $email]);
 

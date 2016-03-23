@@ -7,6 +7,18 @@
             <div class="alert alert-danger" role="alert">{{ $errors->first('time') }}</div>
         @endif
         <div class="col-md-12">
+            <div class="panel panel-warning">
+                <div class="panel-heading">New Feature!</div>
+                <div class="panel-body">
+                    @if(isset($feature))
+                        {{ $feature }}
+                    @else
+                        no feature
+                    @endif
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
             <div class="col-md-4">
                 <div class="panel panel-primary">
                     <div class="panel-heading">Menu</div>
@@ -76,16 +88,8 @@
                         <tbody>
                         @foreach($sum as $order)
                             <tr>
-                                <td>{{ $order->name }}
-                                    @if($order->type == 1)
-                                        面
-                                    @elseif($order->type == 2)
-                                        河粉
-                                    @elseif($order->type == 3)
-                                        米粉
-                                    @endif
-                                </td>
-                                <td>{{ $order->total }} piece</td>
+                                <td>{{ $order['menu'] }}</td>
+                                <td>{{ $order['sum'] }} piece</td>
                             </tr>
                         @endforeach
                         </tbody>
