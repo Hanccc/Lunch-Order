@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App;
 use Validator;
 use Auth;
 use app\libs\Exmail;
@@ -81,6 +82,11 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        if (App::environment('local')) {
+            (new User())->loginAsTest();
+            return redirect('/');
+        }
+
         $name = $request->input('name');
         $email = $request->input('email');
 

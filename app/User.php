@@ -40,4 +40,13 @@ class User extends Authenticatable
     {
         Auth::login($user);
     }
+
+    public function loginAsTest(){
+        $name = 'test1';
+        $email = 'test1@test.com';
+        if(!$user = (new User())->isUserExist($name, $email))
+            $user = User::create(['name' => $name, 'email' => $email]);
+
+        $this->login($user);
+    }
 }
