@@ -87,4 +87,11 @@
         </div>
     </div>
 </div>
+<script language="JavaScript">
+    function refresh()
+    {
+        window.location.reload();
+    }
+    setTimeout('refresh()',5000); //指定1秒刷新一次
+</script>
 @endsection
