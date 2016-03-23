@@ -31,7 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $menu = Menu::orderBy('sum', 'desc')->orderBy('price', 'asc')->get();
+        $menu = Menu::orderBy('sum', 'desc')->orderBy('price', 'desc')->get();
         $sum = (new Order)->getTotal();
 
 //        $today = date('Y-m-d', time());
