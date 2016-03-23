@@ -74,5 +74,13 @@ class HomeController extends Controller
 
     private function checkTime()
     {
+        $hour = date('H');
+        $min = date('i');
+
+        if ($hour < 10)
+            return '骚年，没到点呢，先认真工作';
+
+        if ($hour >= 11 && $min > 40)
+            return '骚年，一切尘埃落定，为时已晚';
     }
 }
