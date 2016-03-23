@@ -33,11 +33,6 @@ class HomeController extends Controller
     {
         $menu = Menu::orderBy('sum', 'desc')->orderBy('price', 'desc')->get();
         $sum = (new Order)->getTotal();
-
-//        $today = date('Y-m-d', time());
-//        $sum = DB::select("SELECT count(*) AS total, menu.name, `order`.type FROM `order`
-//            INNER JOIN menu ON menu.id = order.menuID WHERE `order`.created_at LIKE \"{$today}%\"
-//            GROUP BY menuID, `order`.type ORDER BY count(*) DESC");
         $order = Order::where('created_at', 'like', date('Y-m-d', time()) . '%')->orderBy('created_at', 'desc')->get();
         return view('home', ['menus' => $menu, 'orders' => $order, 'userID' => $this->user->id, 'sum' => $sum]);
     }

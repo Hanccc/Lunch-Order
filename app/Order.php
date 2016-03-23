@@ -57,6 +57,9 @@ class Order extends Model
                 $order[$id]['sum'] = 1;
             }
         }
+        usort($order, function($a, $b) {
+            return $b['sum'] - $a['sum'];
+        });
         return $order;
 
     }
