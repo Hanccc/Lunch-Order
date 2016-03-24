@@ -11,7 +11,7 @@ class Order extends Model
 
     protected $fillable = ['userID', 'menuID', 'type'];
 
-    public $type = [
+    public $types = [
         1 => '面',
         2 => '河粉',
         3 => '米粉',
@@ -39,7 +39,7 @@ class Order extends Model
         $userOrder = [];
         foreach ($sum as $order) {
             if($order->type != 0)
-                $order->name .= $this->type[$order->type];
+                $order->name .= $this->types[$order->type];
             $userOrder[$order->userID]['menu'][] = $order->name;
             $userOrder[$order->userID]['id'][] = $order->menuID;
         }
