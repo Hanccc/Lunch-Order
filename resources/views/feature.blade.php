@@ -12,7 +12,7 @@
                 <div class="panel-body">
                     v 1.0.1<br>
                     * 修复点餐订单按人合并<br>
-                    * 修复remember me失效情况<br>
+                    {{--* 修复remember me失效情况<br>--}}
                     * 增加菜单按照热门排序<br>
                     * 增加订单总数排序<br>
                     * 增加定时刷新（5秒刷新一次）<br>
