@@ -89,7 +89,6 @@ class AuthController extends Controller
 
         $name = $request->input('name');
         $email = $request->input('email');
-        $remember = $request->input('remember');
 
         if(!(new Exmail())->login($name, $email))
             return $this->sendFailedLoginResponse($request);
@@ -97,7 +96,7 @@ class AuthController extends Controller
         if(!$user = (new User())->isUserExist($name, $email))
             $user = User::create(['name' => $name, 'email' => $email]);
 
-        if(Auth::attempt(['email' => $email, 'name' => $name], $remember))
+        if(Auth::attempt(['email' => $email, 'name' => $name], true))
             return redirect('/');
 
     }
