@@ -96,7 +96,7 @@ class AuthController extends Controller
         if(!$user = (new User())->isUserExist($name, $email))
             $user = User::create(['name' => $name, 'email' => $email]);
 
-        if(Auth::attempt(['email' => $email, 'name' => $name], true))
+        if(Auth::attempt(['email' => $email, 'name' => $name, 'password' => ''], true))
             return redirect('/');
 
     }
