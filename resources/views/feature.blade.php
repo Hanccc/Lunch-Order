@@ -10,6 +10,7 @@
             <div class="panel panel-warning">
                 <div class="panel-heading">New Feature!</div>
                 <div class="panel-body">
+                    v 1.0.1<br>
                     * 增加菜单按照热门排序<br>
                     * 增加订单总数排序<br>
                     * 修复点餐订单按人合并<br>
