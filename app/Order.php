@@ -49,12 +49,12 @@ class Order extends Model
     public function groupByOrder($userOrder){
         $order = [];
         foreach ($userOrder as $user) {
-            $id = implode(',', $user['id']);
-            if(isset($order[$id])){
-                $order[$id]['sum'] += 1;
+            $menu = implode(',', $user['menu']);
+            if(isset($order[$menu])){
+                $order[$menu]['sum'] += 1;
             }else{
-                $order[$id]['menu'] = implode(' + ', $user['menu']);
-                $order[$id]['sum'] = 1;
+                $order[$menu]['menu'] = implode(' + ', $user['menu']);
+                $order[$menu]['sum'] = 1;
             }
         }
         usort($order, function($a, $b) {
