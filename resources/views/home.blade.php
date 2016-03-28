@@ -85,7 +85,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="panel panel-danger">
+                <div class="panel panel-warning">
                     <div class="panel-heading">Noodle Total</div>
                     <table class="table">
                         <tbody>
