@@ -39,7 +39,7 @@ class HomeController extends Controller
 
     public function addMenu($price, $name, $type = null)
     {
-        if($type)
+        if ($type)
             Menu::create(['name' => $name, 'price' => $price, 'type' => $type]);
         else
             Menu::create(['name' => $name, 'price' => $price]);
@@ -47,7 +47,7 @@ class HomeController extends Controller
 
     public function order($id, $type = 0)
     {
-        if($error = $this->checkTime())
+        if ($error = $this->checkTime())
             return redirect('/')->withErrors(['time' => $error]);
         Order::create(['userID' => $this->user->id, 'menuID' => $id, 'type' => $type]);
         $menu = Menu::find($id);
@@ -58,6 +58,8 @@ class HomeController extends Controller
 
     public function cancel(Request $requests)
     {
+        if ($error = $this->checkTime())
+            return redirect('/')->withErrors(['time' => $error]);
         $order = Order::find($requests->input('orderID'));
         $user = User::find($order->userID);
 
@@ -74,13 +76,14 @@ class HomeController extends Controller
 
     private function checkTime()
     {
-        $hour = date('H');
-        $min = date('i');
+        $begin = strtotime('10:00:00');
+        $end = strtotime('11:45:00');
+        $time = strtotime(date('H:i'));
 
-        if ($hour < 10)
+        if ($time < $begin)
             return '骚年，没到点呢，先认真工作';
 
-        if ($hour >= 11 && $min > 40)
+        if ($time > $end)
             return '骚年，一切尘埃落定，为时已晚';
     }
 }
