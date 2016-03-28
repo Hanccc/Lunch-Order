@@ -71,14 +71,31 @@
             </div>
             <div class="col-md-4">
                 <div class="panel panel-danger">
-                    <div class="panel-heading">Total</div>
+                    <div class="panel-heading">Rice Total</div>
                     <table class="table">
                         <tbody>
                         @foreach($sum as $order)
-                            <tr>
-                                <td>{{ $order['menu'] }}</td>
-                                <td>{{ $order['sum'] }} piece</td>
-                            </tr>
+                            @if($order['type'] == 0)
+                                <tr>
+                                    <td>{{ $order['menu'] }}</td>
+                                    <td>{{ $order['sum'] }} piece</td>
+                                </tr>
+                            @endif
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">Noodle Total</div>
+                    <table class="table">
+                        <tbody>
+                        @foreach($sum as $order)
+                            @if($order['type'] == 1)
+                                <tr>
+                                    <td>{{ $order['menu'] }}</td>
+                                    <td>{{ $order['sum'] }} piece</td>
+                                </tr>
+                            @endif
                         @endforeach
                         </tbody>
                     </table>

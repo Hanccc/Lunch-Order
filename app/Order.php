@@ -42,6 +42,7 @@ class Order extends Model
                 $order->name .= $this->types[$order->type];
             $userOrder[$order->userID]['menu'][] = $order->name;
             $userOrder[$order->userID]['id'][] = $order->menuID;
+            $userOrder[$order->userID]['type'] = $order->type>0||(isset($userOrder[$order->userID]['type'])&&$userOrder[$order->userID]['type'])?1:0;
         }
         return $this->groupByOrder($userOrder);
     }
@@ -55,6 +56,7 @@ class Order extends Model
             }else{
                 $order[$menu]['menu'] = implode(' + ', $user['menu']);
                 $order[$menu]['sum'] = 1;
+                $order[$menu]['type'] = $user['type'];
             }
         }
         usort($order, function($a, $b) {
