@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>XiYangHui Lunch Order System</title>
+    <title>西洋汇点餐</title>
 
     <!-- Styles -->
     <link href="{{  asset('css/bootstrap.min.css') }}" rel="stylesheet">
