@@ -143,22 +143,25 @@
         $(document).ready(function () {
 
             var menus = [];
-            @foreach($menus as $menu)
-                var menu = Array()
-                menu.push("{{ $menu->name }}")
-                menu.push("{{ $menu->id }}")
-                menus.push(menu)
-            @endforeach
 
-            console.log(menus)
+                    @foreach($menus as $menu)
+                    @if($menu->type == 0)
+            var menu = Array()
+            menu.push("{{ $menu->name }}")
+            menu.push("{{ $menu->id }}")
+            menus.push(menu)
+            @endif
+        @endforeach
 
-            function randomMenu(){
-                var menu = menus[Math.floor(Math.random() * menus.length + 1)-1]
-                    $("#randomMenu").text(menu[0])
-                    $("#choose").attr("href", "/order/"+menu[1]+"/0")
-                }
+        console.log(menus)
 
-            $(".random").click(function(){
+            function randomMenu() {
+                var menu = menus[Math.floor(Math.random() * menus.length + 1) - 1]
+                $("#randomMenu").text(menu[0])
+                $("#choose").attr("href", "/order/" + menu[1] + "/0")
+            }
+
+            $(".random").click(function () {
                 randomMenu()
             })
         })
