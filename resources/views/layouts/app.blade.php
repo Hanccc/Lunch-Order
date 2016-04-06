@@ -9,6 +9,7 @@
 
     <!-- Styles -->
     <link href="{{  asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <script src="{{  asset('js/jquery-2.2.1.min.js') }}"></script>
 
     <style>
         body {
@@ -75,7 +76,6 @@
     @yield('content')
 
     <!-- JavaScripts -->
-    <script src="{{  asset('js/jquery-2.2.1.min.js') }}"></script>
     <script src="{{  asset('js/bootstrap.min.js') }}"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
