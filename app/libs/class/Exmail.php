@@ -18,21 +18,22 @@ class Exmail
 
     private $clientID;
     private $clientSecret;
+    private $token;
 
     public function __construct()
     {
         $this->clientID = config('services.exmail.client_id');
         $this->clientSecret = config('services.exmail.client_secret');
+        $this->token = $this->getToken();
     }
 
-    public function login($name, $email)
+    public function isNameEqualToEmailName($name, $email)
     {
-        $token = $this->getToken();
-
-        return $this->exmailValidate($name, $email, $token);
+        return $this->exmailValidate($name, $email);
     }
 
-    public function getToken(){
+    private function getToken()
+    {
         $response = $this->sendRequest('POST', self::TOKEN_URL, [
             'client_id' => $this->clientID,
             'client_secret' => $this->clientSecret,
@@ -51,16 +52,21 @@ class Exmail
         ])->getBody()->getContents();
     }
 
-    public function exmailValidate($name, $email, $token)
+    public function getEmailInfo($email)
     {
         $response = $this->sendRequest('POST', self::USER_URL, [
             'alias' => $email,
-            'access_token' => $token,
+            'access_token' => $this->token,
         ]);
 
-        $response = json_decode($response);
+        return json_decode($response);
+    }
 
-        return (property_exists($response, 'Name') && $response->Name === $name)?true:false;
+    public function exmailValidate($name, $email)
+    {
+        $response = $this->getEmailInfo($email);
+
+        return (property_exists($response, 'Name') && $response->Name === $name) ? true : false;
     }
 
 }

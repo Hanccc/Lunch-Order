@@ -44,6 +44,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/feature') }}">Feature</a></li>
+                    <li><a href="{{ url('/menu') }}">Menu Manage</a></li>
                 @if (!Auth::guest())
                     @if(Auth::user()->group == 1)
                             <li><a href="{{ url('/admin') }}">Admin</a></li>

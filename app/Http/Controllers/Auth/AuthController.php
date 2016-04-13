@@ -90,7 +90,7 @@ class AuthController extends Controller
         $name = $request->input('name');
         $email = $request->input('email');
 
-        if(!(new Exmail())->login($name, $email))
+        if(!(new Exmail())->isNameEqualToEmailName($name, $email))
             return $this->sendFailedLoginResponse($request);
 
         if(!$user = (new User())->isUserExist($name, $email))

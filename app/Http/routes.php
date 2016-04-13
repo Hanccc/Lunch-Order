@@ -34,18 +34,23 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::post('/login', 'Auth\AuthController@login');
 
-    Route::get('/', 'HomeController@index');
+    Route::group(['middleware' => 'auth'], function(){
 
-    Route::get('/addMenu/{price}/{name}', 'HomeController@addMenu');
-    Route::get('/addMenu/{price}/{name}/{type}', 'HomeController@addMenu');
+        Route::get('/', 'HomeController@index');
 
-    Route::get('/order/{id}/{type}', ['as' => 'order', 'uses' => 'HomeController@order']);
+        Route::get('/order/{id}/{type}', ['as' => 'order', 'uses' => 'HomeController@order']);
 
-    Route::get('/cancel', 'HomeController@cancel');
+        Route::get('/cancel', 'HomeController@cancel');
 
-    Route::get('/admin', 'MenuController@index');
+        Route::get('/admin', 'MenuController@index');
 
-    Route::get('/feature', function(){
-        return view('feature');
+        Route::get('/feature', function(){
+            return view('feature');
+        });
+
+        Route::get('/menu', 'MenuController@index');
+        Route::post('/addMenu', 'MenuController@addMenu');
+        Route::get('changeStatus', 'MenuController@changeStatus');
+
     });
 });
