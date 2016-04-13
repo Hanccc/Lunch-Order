@@ -52,7 +52,7 @@
                                     heat: {{ $menu->sum }}</td>
                                 <td>
                                     @if($menu->status === 1)
-                                        <a class="btn btn-danger btn-xs"
+                                        <a class="btn btn-warning btn-xs"
                                            href="{{ action('MenuController@changeStatus', ['id' => $menu->id]) }}">
                                             disable
                                         </a>
@@ -62,6 +62,12 @@
                                             enable
                                         </a>
                                     @endif
+                                </td>
+                                <td>
+                                    <a class="btn btn-danger btn-xs"
+                                       href="{{ action('MenuController@delete', ['id' => $menu->id]) }}">
+                                        delete
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

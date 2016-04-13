@@ -49,8 +49,9 @@ Route::group(['middleware' => 'web'], function () {
         });
 
         Route::get('/menu', 'MenuController@index');
-        Route::post('/addMenu', 'MenuController@addMenu');
+        Route::post('addMenu', 'MenuController@addMenu');
         Route::get('changeStatus', 'MenuController@changeStatus');
+        Route::get('delete', 'MenuController@delete');
 
     });
 });

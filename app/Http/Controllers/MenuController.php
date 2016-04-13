@@ -46,4 +46,15 @@ class MenuController extends Controller
 
         return redirect('/menu');
     }
+
+    public function delete(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required|integer',
+        ]);
+
+        Menu::destroy($request->input('id'));
+
+        return redirect('/menu');
+    }
 }
