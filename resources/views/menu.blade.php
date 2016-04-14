@@ -51,7 +51,7 @@
                                 <td><span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
                                     heat: {{ $menu->sum }}</td>
                                 <td>
-                                    @if($menu->status === 1)
+                                    @if($menu->status == 1)
                                         <a class="btn btn-warning btn-xs"
                                            href="{{ action('MenuController@changeStatus', ['id' => $menu->id]) }}">
                                             disable
