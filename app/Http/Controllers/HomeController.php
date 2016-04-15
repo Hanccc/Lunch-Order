@@ -9,6 +9,7 @@ use App\Services\OrderService;
 use App\User;
 use Auth;
 use DB;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -26,7 +27,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        /** @var Collection $menu */
         $menu = Menu::where('status', 1)->orderBy('sum', 'desc')->orderBy('price', 'desc')->get();
+        $menu = $menu->sortByDesc(function($menu){
+           return $menu['sum'] * ( $menu['price'] / 20);
+        });
         $sum = (new Order)->getTotal();
         $order = Order::where('created_at', 'like', date('Y-m-d', time()) . '%')->orderBy('created_at', 'desc')->get();
         return view('home', ['menus' => $menu, 'orders' => $order, 'userID' => Auth::user()->id, 'sum' => $sum]);
