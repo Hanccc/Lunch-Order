@@ -63,12 +63,14 @@
                                         </a>
                                     @endif
                                 </td>
-                                <td>
-                                    <a class="btn btn-danger btn-xs"
-                                       href="{{ action('MenuController@delete', ['id' => $menu->id]) }}">
-                                        delete
-                                    </a>
-                                </td>
+                                @if(Auth::user()->id == 1)
+                                    <td>
+                                        <a class="btn btn-danger btn-xs"
+                                           href="{{ action('MenuController@delete', ['id' => $menu->id]) }}">
+                                            delete
+                                        </a>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                         </tbody>
