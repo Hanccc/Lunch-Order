@@ -12,11 +12,14 @@
                         <div class="panel-heading">Menu</div>
                         <table class="table table-hover">
                             <tbody>
-                            @foreach($menus as $id => $menu)
+                            @foreach($menus as $index => $menu)
                                 <tr>
                                     <td>{{ $menu->name }}</td>
                                     <td>{{ $menu->price }} RMB</td>
-                                    <td><span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
+                                    <td>
+                                        @if($index < 5)
+                                            <span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
+                                        @endif
                                         heat: {{ $menu->sum }}</td>
                                     <td>
                                         @if($menu->type == 0)
