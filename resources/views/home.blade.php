@@ -12,7 +12,7 @@
                         <div class="panel-heading">Menu</div>
                         <table class="table table-hover">
                             <tbody>
-                            @foreach($menus as $menu)
+                            @foreach($menus as $id => $menu)
                                 <tr>
                                     <td>{{ $menu->name }}</td>
                                     <td>{{ $menu->price }} RMB</td>
