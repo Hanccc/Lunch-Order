@@ -7,7 +7,7 @@
                 <div class="alert alert-danger" role="alert">{{ $errors->first('time') }}</div>
             @endif
             <div class="col-md-12">
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="panel panel-primary">
                         <div class="panel-heading">Menu</div>
                         <table class="table table-hover">
@@ -81,7 +81,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="panel panel-danger">
                         <div class="panel-heading">Rice Total</div>
                         <table class="table">
