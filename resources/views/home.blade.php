@@ -6,6 +6,11 @@
             @if ($errors->has('time'))
                 <div class="alert alert-danger" role="alert">{{ $errors->first('time') }}</div>
             @endif
+            <div class="col-md-6 col-md-offset-0" style="margin: 0 0 10px 15px">
+                <button id="showAll" class="random btn btn-success">看全部</button>
+                <button id="riceOnly" class="random btn btn-warning">只看饭</button>
+                <button id="noodleOnly" class="random btn btn-info">看粉面</button>
+            </div>
             <div class="col-md-12">
                 <div class="col-md-5">
                     <div class="panel panel-primary">
@@ -148,17 +153,16 @@
         $(document).ready(function () {
 
             var menus = [];
-
                     @foreach($menus as $menu)
-                    @if($menu->type == 0)
-            var menu = Array()
-            menu.push("{{ $menu->name }}")
-            menu.push("{{ $menu->id }}")
-            menus.push(menu)
-            @endif
-        @endforeach
+                        @if($menu->type == 0)
+                            var menu = Array()
+                            menu.push("{{ $menu->name }}")
+                            menu.push("{{ $menu->id }}")
+                            menus.push(menu)
+                        @endif
+                    @endforeach
 
-        console.log(menus)
+            console.log(menus)
 
             function randomMenu() {
                 var menu = menus[Math.floor(Math.random() * menus.length + 1) - 1]
@@ -168,6 +172,21 @@
 
             $(".random").click(function () {
                 randomMenu()
+            })
+
+            $("#riceOnly").click(function(){
+                $("a.btn-xs").parents("tr").show();
+                $("ul.dropdown-menu").parents("tr").hide();
+            })
+
+            $("#noodleOnly").click(function(){
+                $("ul.dropdown-menu").parents("tr").show();
+                $("a.btn-xs").parents("tr").hide();
+            })
+
+            $("#showAll").click(function(){
+                $("ul.dropdown-menu").parents("tr").show();
+                $("a.btn-xs").parents("tr").show();
             })
         })
     </script>
