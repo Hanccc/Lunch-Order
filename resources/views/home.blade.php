@@ -175,18 +175,18 @@
             })
 
             $("#riceOnly").click(function(){
-                $("a.btn-xs").parents("tr").show();
-                $("ul.dropdown-menu").parents("tr").hide();
+                $("div.col-md-5 a.btn-xs").parents("tr").show();
+                $("div.col-md-5 ul.dropdown-menu").parents("tr").hide();
             })
 
             $("#noodleOnly").click(function(){
-                $("ul.dropdown-menu").parents("tr").show();
-                $("a.btn-xs").parents("tr").hide();
+                $("div.col-md-5 ul.dropdown-menu").parents("tr").show();
+                $("div.col-md-5 a.btn-xs").parents("tr").hide();
             })
 
             $("#showAll").click(function(){
-                $("ul.dropdown-menu").parents("tr").show();
-                $("a.btn-xs").parents("tr").show();
+                $("div.col-md-5 ul.dropdown-menu").parents("tr").show();
+                $("div.col-md-5 a.btn-xs").parents("tr").show();
             })
         })
     </script>
