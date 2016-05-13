@@ -10,6 +10,7 @@
                 <button id="showAll" class="random btn btn-success">看全部</button>
                 <button id="riceOnly" class="random btn btn-warning">只看饭</button>
                 <button id="noodleOnly" class="random btn btn-info">看粉面</button>
+                <button class="random btn btn-danger" data-toggle="modal" data-target="#randomModel">随机点</button>
             </div>
             <div class="col-md-12">
                 <div class="col-md-5">
@@ -58,7 +59,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <button class="random btn btn-danger" data-toggle="modal" data-target="#randomModel">随机点</button>
                 </div>
                 <div class="col-md-4">
                     <div class="panel panel-success">
