@@ -87,6 +87,9 @@
                                                href="{{ action('HomeController@cancel', ['id' => md5($userID.$order->user->name), 'orderID' => $order->id]) }}">cancel</a>
                                         @endif
                                     </td>
+                                    @if($order->pack == 1)
+                                        <td><span class="label label-info">takeout</span></td>
+                                    @endif
                                 </tr>
                             @endforeach
                             </tbody>
