@@ -28,6 +28,11 @@ class OrderService
     public static function cancelOrder($requests)
     {
         $order = Order::find($requests->input('orderID'));
+        if($order->pack == 1){
+            if ($error = self::checkTakeoutTime())
+                return redirect('/')->withErrors(['time' => $error]);
+        }
+
         $user = User::find($order->userID);
 
         if (md5($user->id . $user->name) !== $requests->input('id'))
@@ -42,16 +47,22 @@ class OrderService
 
     public static function checkOrderTime()
     {
-
-        $begin = strtotime('10:00:00');
         $end = strtotime('11:45:00');
         $time = strtotime(date('H:i'));
-
-        if ($time < $begin)
-            return '骚年，没到点呢，先认真工作';
 
         if ($time > $end)
             return '骚年，一切尘埃落定，为时已晚';
     }
+
+    public static function checkTakeoutTime()
+    {
+        $end = strtotime('10:30:00');
+        $time = strtotime(date('H:i'));
+
+        if ($time > $end)
+            return '骚年，一切尘埃落定，为时已晚';
+    }
+
+
 
 }
