@@ -37,12 +37,12 @@ class HomeController extends Controller
         return view('home', ['menus' => $menu, 'orders' => $order, 'userID' => Auth::user()->id, 'sum' => $sum]);
     }
 
-    public function order($id, $type = 0)
+    public function order($id, $type = 0, $pack = 0)
     {
         if ($error = OrderService::checkOrderTime())
             return redirect('/')->withErrors(['time' => $error]);
 
-        OrderService::createOrder($id, $type);
+        OrderService::createOrder($id, $type, $pack);
 
         return redirect('/');
     }

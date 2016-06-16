@@ -38,7 +38,7 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::get('/', 'HomeController@index');
 
-        Route::get('/order/{id}/{type}', ['as' => 'order', 'uses' => 'HomeController@order']);
+        Route::get('/order/{id}/{type}/{pack}', ['as' => 'order', 'uses' => 'HomeController@order']);
 
         Route::get('/cancel', 'HomeController@cancel');
 

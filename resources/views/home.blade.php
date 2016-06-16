@@ -32,7 +32,9 @@
                                     <td>
                                         @if($menu->type == 0)
                                             <a class="btn btn-primary btn-xs"
-                                               href="{{ action('HomeController@order', ['id' => $menu->id, 'type' => 0]) }}">order</a>
+                                               href="{{ action('HomeController@order', ['id' => $menu->id, 'type' => 0, 'pack' => 0]) }}">order</a>
+                                            <a class="btn btn-success btn-xs"
+                                               href="{{ action('HomeController@order', ['id' => $menu->id, 'type' => 0, 'pack' => 1]) }}">打包</a>
                                         @else
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-xs btn-primary dropdown-toggle"
@@ -42,13 +44,13 @@
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li>
-                                                        <a href="{{ action('HomeController@order', ['id' => $menu->id, 'type' => 1]) }}">面</a>
+                                                        <a href="{{ action('HomeController@order', ['id' => $menu->id, 'type' => 1, 'pack' => 0]) }}">面</a>
                                                     </li>
                                                     <li>
-                                                        <a href="{{ action('HomeController@order', ['id' => $menu->id, 'type' => 2]) }}">河粉</a>
+                                                        <a href="{{ action('HomeController@order', ['id' => $menu->id, 'type' => 2, 'pack' => 0]) }}">河粉</a>
                                                     </li>
                                                     <li>
-                                                        <a href="{{ action('HomeController@order', ['id' => $menu->id, 'type' => 3]) }}">米粉</a>
+                                                        <a href="{{ action('HomeController@order', ['id' => $menu->id, 'type' => 3, 'pack' => 0]) }}">米粉</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -97,7 +99,22 @@
                         <table class="table">
                             <tbody>
                             @foreach($sum as $order)
-                                @if($order['type'] == 0)
+                                @if($order['type'] == 0 && $order['pack'] == 0)
+                                    <tr>
+                                        <td>{{ $order['menu'] }}</td>
+                                        <td>{{ $order['sum'] }} piece</td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="panel panel-info">
+                        <div class="panel-heading">打包 Total</div>
+                        <table class="table">
+                            <tbody>
+                            @foreach($sum as $order)
+                                @if($order['type'] == 0 && $order['pack'] == 1)
                                     <tr>
                                         <td>{{ $order['menu'] }}</td>
                                         <td>{{ $order['sum'] }} piece</td>

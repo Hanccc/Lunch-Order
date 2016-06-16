@@ -9,7 +9,7 @@ class Order extends Model
 {
     protected $table = 'order';
 
-    protected $fillable = ['userID', 'menuID', 'type'];
+    protected $fillable = ['userID', 'menuID', 'type', 'pack'];
 
     public $types = [
         1 => '面',
@@ -27,7 +27,7 @@ class Order extends Model
 
     public function getTotal(){
         $today = date('Y-m-d', time());
-        $sum = DB::select("SELECT  menu.name, menu.id menuID, `order`.type, users.id userID FROM `order`
+        $sum = DB::select("SELECT  menu.name, menu.id menuID, `order`.type, users.id userID, `order`.pack FROM `order`
             INNER JOIN users ON users.id = order.userID
             INNER JOIN menu ON menu.id = order.menuID WHERE `order`.created_at LIKE '{$today}%'
             GROUP BY `order`.id, `order`.type ORDER BY userID, menu.id DESC");
@@ -42,6 +42,7 @@ class Order extends Model
                 $order->name .= $this->types[$order->type];
             $userOrder[$order->userID]['menu'][] = $order->name;
             $userOrder[$order->userID]['id'][] = $order->menuID;
+            $userOrder[$order->userID]['pack'] = $order->pack;
             $userOrder[$order->userID]['type'] = $order->type>0||(isset($userOrder[$order->userID]['type'])&&$userOrder[$order->userID]['type'])?1:0;
         }
         return $this->groupByOrder($userOrder);
@@ -57,6 +58,7 @@ class Order extends Model
                 $order[$menu]['menu'] = implode(' + ', $user['menu']);
                 $order[$menu]['sum'] = 1;
                 $order[$menu]['type'] = $user['type'];
+                $order[$menu]['pack'] = $user['pack'];
             }
         }
         usort($order, function($a, $b) {

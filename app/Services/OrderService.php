@@ -17,9 +17,9 @@ use Auth;
 class OrderService
 {
 
-    public static function createOrder($id, $type = 0)
+    public static function createOrder($id, $type = 0, $pack = 0)
     {
-        Order::create(['userID' => Auth::user()->id, 'menuID' => $id, 'type' => $type]);
+        Order::create(['userID' => Auth::user()->id, 'menuID' => $id, 'type' => $type, 'pack' => $pack]);
         $menu = Menu::find($id);
         $menu->sum += 1;
         $menu->save();
