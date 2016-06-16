@@ -34,7 +34,7 @@
                                             <a class="btn btn-primary btn-xs"
                                                href="{{ action('HomeController@order', ['id' => $menu->id, 'type' => 0, 'pack' => 0]) }}">order</a>
                                             <a class="btn btn-success btn-xs"
-                                               href="{{ action('HomeController@order', ['id' => $menu->id, 'type' => 0, 'pack' => 1]) }}">打包</a>
+                                               href="{{ action('HomeController@order', ['id' => $menu->id, 'type' => 0, 'pack' => 1]) }}">takeout</a>
                                         @else
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-xs btn-primary dropdown-toggle"
@@ -110,7 +110,7 @@
                         </table>
                     </div>
                     <div class="panel panel-info">
-                        <div class="panel-heading">打包 Total</div>
+                        <div class="panel-heading">takeout Total</div>
                         <table class="table">
                             <tbody>
                             @foreach($sum as $order)
