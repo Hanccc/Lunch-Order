@@ -28,10 +28,10 @@ class OrderService
     public static function cancelOrder($requests)
     {
         $order = Order::find($requests->input('orderID'));
-//        if($order->pack == 1){
-//            if ($error = self::checkTakeoutTime())
-//                return redirect('/')->withErrors(['time' => $error]);
-//        }
+        if($order->pack == 1){
+            if ($error = self::checkTakeoutTime())
+                return redirect('/')->withErrors(['time' => $error]);
+        }
 
         $user = User::find($order->userID);
 

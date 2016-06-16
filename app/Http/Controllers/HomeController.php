@@ -43,10 +43,10 @@ class HomeController extends Controller
             if ($error = OrderService::checkOrderTime())
                 return redirect('/')->withErrors(['time' => $error]);
         }
-//        if($pack == 1){
-//            if ($error = OrderService::checkTakeoutTime())
-//                return redirect('/')->withErrors(['time' => $error]);
-//        }
+        if($pack == 1){
+            if ($error = OrderService::checkTakeoutTime())
+                return redirect('/')->withErrors(['time' => $error]);
+        }
 
         OrderService::createOrder($id, $type, $pack);
 
