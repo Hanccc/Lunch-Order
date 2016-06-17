@@ -33,7 +33,7 @@
                                         @if($menu->type == 0)
                                             <a class="btn btn-primary btn-xs"
                                                href="{{ action('HomeController@order', ['id' => $menu->id, 'type' => 0, 'pack' => 0]) }}">order</a>
-                                            <a class="btn btn-success btn-xs"
+                                            <a class="btn btn-info btn-xs"
                                                href="{{ action('HomeController@order', ['id' => $menu->id, 'type' => 0, 'pack' => 1]) }}">takeout</a>
                                         @else
                                             <div class="btn-group">
