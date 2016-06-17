@@ -99,12 +99,12 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="panel panel-danger">
-                        <div class="panel-heading">Rice Total</div>
+                    <div class="panel panel-info">
+                        <div class="panel-heading">takeout Total</div>
                         <table class="table">
                             <tbody>
                             @foreach($sum as $order)
-                                @if($order['type'] == 0 && $order['pack'] == 0)
+                                @if($order['type'] == 0 && $order['pack'] == 1)
                                     <tr>
                                         <td>{{ $order['menu'] }}</td>
                                         <td>{{ $order['sum'] }} piece</td>
@@ -114,12 +114,12 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="panel panel-info">
-                        <div class="panel-heading">takeout Total</div>
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">Rice Total</div>
                         <table class="table">
                             <tbody>
                             @foreach($sum as $order)
-                                @if($order['type'] == 0 && $order['pack'] == 1)
+                                @if($order['type'] == 0 && $order['pack'] == 0)
                                     <tr>
                                         <td>{{ $order['menu'] }}</td>
                                         <td>{{ $order['sum'] }} piece</td>
