@@ -80,16 +80,18 @@
                                             米粉
                                         @endif
                                     </td>
-                                    <td>{{ $order->menu->price }} RMB</td>
                                     <td>
                                         @if($order->user->id == $userID)
                                             <a class="btn btn-danger btn-xs"
                                                href="{{ action('HomeController@cancel', ['id' => md5($userID.$order->user->name), 'orderID' => $order->id]) }}">cancel</a>
                                         @endif
                                     </td>
+
+                                    <td>
                                     @if($order->pack == 1)
-                                        <td><span class="label label-info">takeout</span></td>
+                                        <span class="label label-info">takeout</span>
                                     @endif
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
