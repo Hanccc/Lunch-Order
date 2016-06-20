@@ -52,13 +52,13 @@ class Order extends Model
         $order = [];
         foreach ($userOrder as $user) {
             $menu = implode(',', $user['menu']);
-            if(isset($order[$menu])){
-                $order[$menu]['sum'] += 1;
+            if(isset($order[$menu.$user['pack']]) && $order[$menu.$user['pack']]['pack'] == $user['pack']){
+                $order[$menu.$user['pack']]['sum'] += 1;
             }else{
-                $order[$menu]['menu'] = implode(' + ', $user['menu']);
-                $order[$menu]['sum'] = 1;
-                $order[$menu]['type'] = $user['type'];
-                $order[$menu]['pack'] = $user['pack'];
+                $order[$menu.$user['pack']]['menu'] = implode(' + ', $user['menu']);
+                $order[$menu.$user['pack']]['sum'] = 1;
+                $order[$menu.$user['pack']]['type'] = $user['type'];
+                $order[$menu.$user['pack']]['pack'] = $user['pack'];
             }
         }
         usort($order, function($a, $b) {
