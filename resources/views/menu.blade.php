@@ -63,7 +63,7 @@
                                         </a>
                                     @endif
                                 </td>
-                                @if(Auth::user()->id == 1)
+                                @if(in_array(Auth::user()->id, [1, 2, 3]))
                                     <td>
                                         <a class="btn btn-danger btn-xs"
                                            href="{{ action('MenuController@delete', ['id' => $menu->id]) }}">
